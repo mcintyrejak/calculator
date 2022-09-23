@@ -1,7 +1,7 @@
 let total = 0;
 
 function add(...nums) {
-    total += nums.reduce(
+    total = nums.reduce(
         (previousNum, currentNum) => previousNum + currentNum,
         total
     );
@@ -9,7 +9,7 @@ function add(...nums) {
 };
 
 function subtract(...nums) {
-    total -= nums.reduce(
+    total = nums.reduce(
         (previousNum, currentNum) => previousNum - currentNum,
         total
     );
@@ -17,16 +17,19 @@ function subtract(...nums) {
 }
 
 function multiply(...nums) {
-    total *= nums.reduce(
+    total = nums.reduce(
         (previousNum, currentNum) => previousNum * currentNum,
         total
     );
     return total
 }
 
-function divide(num) {
-    total /= num;
-    return total;
+function divide(...nums) {
+    total = nums.reduce(
+        (previousNum, currentNum) => previousNum / currentNum,
+        total
+    );
+    return total
 }
 
 // function operate(operator, num1, num2) {
