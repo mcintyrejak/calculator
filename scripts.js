@@ -10,15 +10,18 @@ function add(...nums) {
 
 function subtract(...nums) {
     total -= nums.reduce(
-        (previousNum, currentNum) => previousNum + currentNum,
+        (previousNum, currentNum) => previousNum - currentNum,
         total
     );
     return total
 }
 
-function multiply(num) {
-    total *= num;
-    return total;
+function multiply(...nums) {
+    total *= nums.reduce(
+        (previousNum, currentNum) => previousNum * currentNum,
+        total
+    );
+    return total
 }
 
 function divide(num) {
