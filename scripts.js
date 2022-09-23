@@ -1,5 +1,4 @@
 let total = 0;
-let test = [1, 2, 3];
 
 function add(...nums) {
     total += nums.reduce(
@@ -9,9 +8,12 @@ function add(...nums) {
     return total
 };
 
-function subtract(num) {
-    total -= num;
-    return total;
+function subtract(...nums) {
+    total -= nums.reduce(
+        (previousNum, currentNum) => previousNum + currentNum,
+        total
+    );
+    return total
 }
 
 function multiply(num) {
