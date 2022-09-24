@@ -32,8 +32,19 @@ function divide(...nums) {
     return total
 }
 
-// function operate(operator, num1, num2) {
 
-//     operator(num1, num2)
-// }
+function operate(operator, ...nums) {
+    switch (operator) {
+        case "+":
+            return add(...nums);
+        case "-":
+            return subtract(...nums);
+        case "*":
+            return multiply(...nums);
+        case "/":
+            return divide(...nums);
+    }
+};
+
+console.log(operate("-", 1, 2, 3, 4))
 
