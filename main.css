@@ -31,12 +31,12 @@ main {
     color: #EC575B;
 }
 
-#show-input {
+#input-display {
     padding: 7px;
     height: 50%;
 }
 
-#answer {
+#answer-display {
     padding: 7px;
     height: 50%;
     align-self: flex-end;
