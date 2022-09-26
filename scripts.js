@@ -2,17 +2,9 @@ let total = 0;
 let num1 = 0;
 let num2 = 0;
 
-// function add(nums) {
-//     total = nums.reduce(
-//         (previousNum, currentNum) => previousNum + currentNum,
-//         total
-//     );
-//     return total
-// };
-
 function add(num1, num2) {
     total += num1 + num2;
-    console.log(total)
+    return total;
 }
 
 function subtract(...nums) {
@@ -86,6 +78,7 @@ addBtn.addEventListener('click', () => {
 let equalsBtn = document.querySelector('.equals-btn');
 equalsBtn.addEventListener('click', () => {
     operate(operator, num1, num2);
+    answerDisplay.textContent = total;
 });
 
 let sevenBtn = document.querySelector('.seven-btn');
