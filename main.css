@@ -33,14 +33,14 @@ main {
 
 #input-display {
     padding: 7px;
-    height: 50%;
+    height: 40%;
 }
 
 #answer-display {
     padding: 7px;
-    height: 50%;
+    height: 60%;
     align-self: flex-end;
-    font-size: 25pt;
+    font-size: 35pt;
 }
 
 #buttons {

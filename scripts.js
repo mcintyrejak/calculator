@@ -1,12 +1,19 @@
 let total = 0;
+let num1 = 0;
+let num2 = 0;
 
-function add(...nums) {
-    total = nums.reduce(
-        (previousNum, currentNum) => previousNum + currentNum,
-        total
-    );
-    return total
-};
+// function add(nums) {
+//     total = nums.reduce(
+//         (previousNum, currentNum) => previousNum + currentNum,
+//         total
+//     );
+//     return total
+// };
+
+function add(num1, num2) {
+    total += num1 + num2;
+    console.log(total)
+}
 
 function subtract(...nums) {
     total = nums.reduce(
@@ -32,19 +39,7 @@ function divide(...nums) {
     return total
 }
 
-// Don't forget to make it throw an error if you try to divide by zero.
-function operate(operator, ...nums) {
-    switch (operator) {
-        case "+":
-            return add(...nums);
-        case "-":
-            return subtract(...nums);
-        case "*":
-            return multiply(...nums);
-        case "/":
-            return divide(...nums);
-    }
-};
+
 
 
 let operator = "";
@@ -55,7 +50,7 @@ let inputDisplay = document.querySelector('#input-display');
 let cBtn = document.querySelector('.c');
 cBtn.addEventListener('click', () => {
     total = 0;
-    answerDisplay.textContent = "";
+    answerDisplay.textContent = "0";
     inputDisplay.textContent = "";
 });
 
@@ -90,12 +85,17 @@ addBtn.addEventListener('click', () => {
 
 let equalsBtn = document.querySelector('.equals-btn');
 equalsBtn.addEventListener('click', () => {
-    answerDisplay.textContent = total;
+    operate(operator, num1, num2);
 });
 
 let sevenBtn = document.querySelector('.seven-btn');
 sevenBtn.addEventListener('click', () => {
     inputDisplay.textContent += 7;
+    if (operator) {
+        num2 = 7;
+    }
+    num1 = 7;
+    console.log(`num1: ${num1} num2: ${num2}`)
 });
 
 let eightBtn = document.querySelector('.eight-btn');
@@ -152,3 +152,17 @@ let delBtn = document.querySelector('.del-btn');
 delBtn.addEventListener('click', () => {
     console.log("You clicked delete but idk what to do with that yet.")
 });
+
+// Don't forget to make it throw an error if you try to divide by zero.
+function operate(operator, num1, num2) {
+    switch (operator) {
+        case "+":
+            return add(num1, num2);
+        case "-":
+            return subtract(num1, num2);
+        case "*":
+            return multiply(num1, num2);
+        case "/":
+            return divide(num1, num2);
+    }
+};
