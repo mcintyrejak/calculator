@@ -65,7 +65,7 @@ function operate(operator, prevValue, currentValue) {
             return add(prevValue, currentValue);
         case "-":
             return subtract(prevValue, currentValue);
-        case "*":
+        case "x":
             return multiply(prevValue, currentValue);
         case "/":
             return divide(prevValue, currentValue);
@@ -73,7 +73,7 @@ function operate(operator, prevValue, currentValue) {
 }
 
 equalsBtn.addEventListener('click', function () {
-    if (total) {
+    if (total) { //allows operation on previous total
         prevValue = total;
     }
     currentValue = answerDisplay.textContent;
