@@ -1,161 +1,74 @@
-let total = 0;
-let num1 = 0;
-let num2 = 0;
+let prevValue = '';
+let currentValue = '';
+let total = '';
+let operator = '';
 
-function add(num1, num2) {
-    total += num1 + num2;
-    return total;
-}
-
-function subtract(...nums) {
-    total = nums.reduce(
-        (previousNum, currentNum) => previousNum - currentNum,
-        total
-    );
-    return total
-}
-
-function multiply(...nums) {
-    total = nums.reduce(
-        (previousNum, currentNum) => previousNum * currentNum,
-        total
-    );
-    return total
-}
-
-function divide(...nums) {
-    total = nums.reduce(
-        (previousNum, currentNum) => previousNum / currentNum,
-        total
-    );
-    return total
-}
-
-
-
-
-let operator = "";
+const numButtons = document.querySelectorAll('.num-btn');
+const inputDisplay = document.querySelector('#input-display');
 const answerDisplay = document.querySelector('#answer-display');
-let inputDisplay = document.querySelector('#input-display');
+const operatorBtns = document.querySelectorAll('.operator-btn');
+const equalsBtn = document.querySelector('.equals-btn');
 
-//attach a variable to each button clicked 
-let cBtn = document.querySelector('.c');
-cBtn.addEventListener('click', () => {
-    total = 0;
-    answerDisplay.textContent = "0";
-    inputDisplay.textContent = "";
-});
+numButtons.forEach((numBtn) => numBtn.addEventListener('click', function (e) {
+    handleNumber(e.target.textContent);
+    answerDisplay.textContent = currentValue;
+}));
 
-let plusMinusBtn = document.querySelector('.plus-minus');
-plusMinusBtn.addEventListener('click', () => {
-    console.log("You clicked +/- but idk what to do with that yet.")
-});
-
-let divideBtn = document.querySelector('.divide-btn');
-divideBtn.addEventListener('click', () => {
-    operator = "/";
-    inputDisplay.textContent += "/";
-});
-
-let multiplyBtn = document.querySelector('.multiply-btn');
-multiplyBtn.addEventListener('click', () => {
-    operator = "*";
-    inputDisplay.textContent += "*";
-});
-
-let subtractBtn = document.querySelector('.subtract-btn');
-subtractBtn.addEventListener('click', () => {
-    operator = "-";
-    inputDisplay.textContent += "-";
-});
-
-let addBtn = document.querySelector('.add-btn');
-addBtn.addEventListener('click', () => {
-    operator = "+";
-    inputDisplay.textContent += "+";
-});
-
-let equalsBtn = document.querySelector('.equals-btn');
-equalsBtn.addEventListener('click', () => {
-    operate(operator, num1, num2);
-    answerDisplay.textContent = total;
-});
-
-let sevenBtn = document.querySelector('.seven-btn');
-sevenBtn.addEventListener('click', () => {
-    inputDisplay.textContent += 7;
-    if (operator) {
-        num2 = 7;
+function handleNumber(num) {
+    if (currentValue.length <= 12) { //don't let the user add more numbers after a certain point
+        currentValue += num;
     }
-    num1 = 7;
-    console.log(`num1: ${num1} num2: ${num2}`)
-});
+}
 
-let eightBtn = document.querySelector('.eight-btn');
-eightBtn.addEventListener('click', () => {
-    inputDisplay.textContent += 8;
-});
+operatorBtns.forEach((operatorBtn) => operatorBtn.addEventListener('click', function (e) {
+    handleOperator(e.target.textContent);
+    inputDisplay.textContent = answerDisplay.innerText
+    inputDisplay.textContent += ` ${operator} `;
+    answerDisplay.textContent = '';
+}));
 
-let nineBtn = document.querySelector('.nine-btn');
-nineBtn.addEventListener('click', () => {
-    inputDisplay.textContent += 9;
-});
+function handleOperator(op) {
+    operator = op;
+    prevValue = currentValue;
+    currentValue = '';
+}
 
-let fourBtn = document.querySelector('.four-btn');
-fourBtn.addEventListener('click', () => {
-    inputDisplay.textContent += 4;
-});
+function divide(prevValue, currentValue) {
+    total = prevValue / currentValue;
+    answerDisplay.textContent = total;
+}
 
-let fiveBtn = document.querySelector('.five-btn');
-fiveBtn.addEventListener('click', () => {
-    inputDisplay.textContent += 5;
-});
+function multiply(prevValue, currentValue) {
+    total = prevValue * currentValue;
+    answerDisplay.textContent = total;
+}
 
-let sixBtn = document.querySelector('.six-btn');
-sixBtn.addEventListener('click', () => {
-    inputDisplay.textContent += 6;
-});
+function subtract(prevValue, currentValue) {
+    total = prevValue - currentValue;
+    answerDisplay.textContent = total;
+}
 
-let oneBtn = document.querySelector('.one-btn');
-oneBtn.addEventListener('click', () => {
-    inputDisplay.textContent += 1;
-});
+function add(prevValue, currentValue) {
+    total = prevValue + currentValue;
+    answerDisplay.textContent = total;
+}
 
-let twoBtn = document.querySelector('.two-btn');
-twoBtn.addEventListener('click', () => {
-    inputDisplay.textContent += 2;
-});
-
-let threeBtn = document.querySelector('.three-btn');
-threeBtn.addEventListener('click', () => {
-    inputDisplay.textContent += 3;
-});
-
-let zeroBtn = document.querySelector('.zero-btn');
-zeroBtn.addEventListener('click', () => {
-    inputDisplay.textContent += 0;
-});
-
-let decimalBtn = document.querySelector('.decimal-btn');
-decimalBtn.addEventListener('click', () => {
-    inputDisplay.textContent += ".";
-});
-
-let delBtn = document.querySelector('.del-btn');
-delBtn.addEventListener('click', () => {
-    console.log("You clicked delete but idk what to do with that yet.")
-});
-
-// Don't forget to make it throw an error if you try to divide by zero.
-function operate(operator, num1, num2) {
+function operate(operator, prevValue, currentValue) {
     switch (operator) {
         case "+":
-            return add(num1, num2);
+            return add(prevValue, currentValue);
         case "-":
-            return subtract(num1, num2);
+            return subtract(prevValue, currentValue);
         case "*":
-            return multiply(num1, num2);
+            return multiply(prevValue, currentValue);
         case "/":
-            return divide(num1, num2);
+            return divide(prevValue, currentValue);
     }
-};
+}
+
+equalsBtn.addEventListener('click', function () {
+    currentValue = answerDisplay.textContent;
+    inputDisplay.textContent += `${currentValue} =`;
+    answerDisplay.textContent = '';
+    operate(operator, prevValue, currentValue);
+});

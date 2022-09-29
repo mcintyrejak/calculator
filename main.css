@@ -56,7 +56,8 @@ main {
     border-radius: 3px;
 }
 
-.operator-btn {
+.operator-btn,
+.misc-btn {
     background-color: rgb(242, 122, 125, .35);
     width: 85px;
     height: 85px;
