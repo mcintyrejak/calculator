@@ -9,6 +9,7 @@ const answerDisplay = document.querySelector('#answer-display');
 const operatorBtns = document.querySelectorAll('.operator-btn');
 const equalsBtn = document.querySelector('.equals-btn');
 const clearBtn = document.querySelector('.c-btn');
+const deleteBtn = document.querySelector('.del-btn');
 
 answerDisplay.innerText = '0';
 
@@ -82,4 +83,9 @@ clearBtn.addEventListener('click', function () {
     prevValue = '';
     currentValue = '';
     total = '';
+})
+
+deleteBtn.addEventListener('click', function () {
+    answerDisplay.innerText = '0';
+    currentValue = '';
 })
