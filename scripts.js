@@ -38,10 +38,12 @@ function handleOperator(op) {
 }
 
 function divide(prevValue, currentValue) {
-    total = prevValue / currentValue;
-    answerDisplay.textContent = total;
-
-
+    if (currentValue === '0') {
+        answerDisplay.textContent = "(´◕︵◕`✿)"
+    } else {
+        total = prevValue / currentValue;
+        answerDisplay.textContent = total;
+    }
 }
 
 function multiply(prevValue, currentValue) {
