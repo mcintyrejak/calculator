@@ -40,6 +40,8 @@ function handleOperator(op) {
 function divide(prevValue, currentValue) {
     total = prevValue / currentValue;
     answerDisplay.textContent = total;
+
+
 }
 
 function multiply(prevValue, currentValue) {
@@ -71,10 +73,14 @@ function operate(operator, prevValue, currentValue) {
 }
 
 equalsBtn.addEventListener('click', function () {
+    if (total) {
+        prevValue = total;
+    }
     currentValue = answerDisplay.textContent;
     inputDisplay.textContent += `${currentValue} =`;
     answerDisplay.textContent = '';
     operate(operator, prevValue, currentValue);
+    console.log(operator, prevValue, currentValue, total)
 });
 
 clearBtn.addEventListener('click', function () {
