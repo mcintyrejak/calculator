@@ -1,6 +1,6 @@
 let prevValue = '';
 let currentValue = '';
-let total = '';
+let total = 0;
 let operator = '';
 
 const numButtons = document.querySelectorAll('.num-btn');
@@ -8,6 +8,9 @@ const inputDisplay = document.querySelector('#input-display');
 const answerDisplay = document.querySelector('#answer-display');
 const operatorBtns = document.querySelectorAll('.operator-btn');
 const equalsBtn = document.querySelector('.equals-btn');
+const clearBtn = document.querySelector('.c-btn');
+
+answerDisplay.innerText = '0';
 
 numButtons.forEach((numBtn) => numBtn.addEventListener('click', function (e) {
     handleNumber(e.target.textContent);
@@ -49,7 +52,7 @@ function subtract(prevValue, currentValue) {
 }
 
 function add(prevValue, currentValue) {
-    total = prevValue + currentValue;
+    total = Number(prevValue) + Number(currentValue);
     answerDisplay.textContent = total;
 }
 
@@ -72,3 +75,11 @@ equalsBtn.addEventListener('click', function () {
     answerDisplay.textContent = '';
     operate(operator, prevValue, currentValue);
 });
+
+clearBtn.addEventListener('click', function () {
+    inputDisplay.innerText = '';
+    answerDisplay.innerText = '0';
+    prevValue = '';
+    currentValue = '';
+    total = '';
+})
