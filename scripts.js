@@ -10,6 +10,7 @@ const operatorBtns = document.querySelectorAll('.operator-btn');
 const equalsBtn = document.querySelector('.equals-btn');
 const clearBtn = document.querySelector('.c-btn');
 const deleteBtn = document.querySelector('.del-btn');
+const plusMinusBtn = document.querySelector('.plusminus-btn')
 
 answerDisplay.innerText = '0';
 
@@ -96,4 +97,9 @@ clearBtn.addEventListener('click', function () {
 deleteBtn.addEventListener('click', function () {
     answerDisplay.innerText = '0';
     currentValue = '';
+})
+
+plusMinusBtn.addEventListener('click', function () {
+    currentValue = currentValue * (-1);
+    answerDisplay.innerText = currentValue;
 })
