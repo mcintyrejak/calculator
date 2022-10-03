@@ -34,13 +34,20 @@ operatorBtns.forEach((operatorBtn) => operatorBtn.addEventListener('click', func
 
 function handleOperator(op) {
     operator = op;
-    prevValue = currentValue;
-    currentValue = '';
+    if (prevValue && currentValue) {
+        operate(operator, prevValue, currentValue);
+        currentValue = total;
+    } else {
+        //if you're just operating on two numbers...
+
+        prevValue = currentValue;
+        currentValue = '';
+    }
 }
 
 function divide(prevValue, currentValue) {
     if (currentValue === '0') {
-        answerDisplay.textContent = "(´◕︵◕`✿)"
+        answerDisplay.textContent = "ERROR!"
     } else {
         total = prevValue / currentValue;
         answerDisplay.textContent = total;
