@@ -17,6 +17,7 @@ answerDisplay.innerText = '0';
 numButtons.forEach((numBtn) => numBtn.addEventListener('click', function (e) {
     handleNumber(e.target.textContent);
     answerDisplay.textContent = currentValue;
+    console.log("prevValue:", prevValue, "currentValue:", currentValue, "total:", total, "operator:", operator)
 }));
 
 function handleNumber(num) {
@@ -27,22 +28,15 @@ function handleNumber(num) {
 
 operatorBtns.forEach((operatorBtn) => operatorBtn.addEventListener('click', function (e) {
     handleOperator(e.target.textContent);
-    inputDisplay.textContent = answerDisplay.innerText
-    inputDisplay.textContent += ` ${operator} `;
-    answerDisplay.textContent = '';
+    // inputDisplay.textContent = answerDisplay.innerText
+    // inputDisplay.textContent += ` ${operator} `;
+    // answerDisplay.textContent = '';
 }));
 
 function handleOperator(op) {
     operator = op;
-    if (prevValue && currentValue) {
-        operate(operator, prevValue, currentValue);
-        currentValue = total;
-    } else {
-        //if you're just operating on two numbers...
-
-        prevValue = currentValue;
-        currentValue = '';
-    }
+    prevValue = currentValue;
+    currentValue = '';
 }
 
 function divide(prevValue, currentValue) {
@@ -50,23 +44,26 @@ function divide(prevValue, currentValue) {
         answerDisplay.textContent = "ERROR!"
     } else {
         total = prevValue / currentValue;
-        answerDisplay.textContent = total;
+        // answerDisplay.textContent = total;
     }
 }
 
 function multiply(prevValue, currentValue) {
-    total = prevValue * currentValue;
-    answerDisplay.textContent = total;
+    total = Number(prevValue) * Number(currentValue);
+    return total;
+    // answerDisplay.textContent = total;
 }
 
 function subtract(prevValue, currentValue) {
     total = prevValue - currentValue;
-    answerDisplay.textContent = total;
+    return total;
+    // answerDisplay.textContent = total;
 }
 
 function add(prevValue, currentValue) {
     total = Number(prevValue) + Number(currentValue);
-    answerDisplay.textContent = total;
+    return total;
+    // answerDisplay.textContent = total;
 }
 
 function operate(operator, prevValue, currentValue) {
@@ -80,17 +77,12 @@ function operate(operator, prevValue, currentValue) {
         case "/":
             return divide(prevValue, currentValue);
     }
+
 }
 
 equalsBtn.addEventListener('click', function () {
-    if (total) { //allows operation on previous total
-        prevValue = total;
-    }
-    currentValue = answerDisplay.textContent;
-    inputDisplay.textContent += `${currentValue} =`;
-    answerDisplay.textContent = '';
     operate(operator, prevValue, currentValue);
-    console.log(operator, prevValue, currentValue, total)
+    answerDisplay.textContent = total;
 });
 
 clearBtn.addEventListener('click', function () {
