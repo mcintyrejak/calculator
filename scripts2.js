@@ -56,6 +56,10 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
         answerDisplay.innerText = '';
     }
 
+    if (type === 'plusminus') {
+        answerDisplay.innerText *= -1;
+    }
+
 }))
 
 function calculate(op, prevValue, currValue) {
