@@ -11,6 +11,10 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
     let value = button.innerText;
     let type = button.dataset.type;
 
+    if (answerDisplay.innerText.length > 12) {
+        return;
+    }
+
     if (type === 'num') {
         answerDisplay.innerText += value;
         currentValue = answerDisplay.innerText;
@@ -18,7 +22,6 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
 
     if (type === 'operator' && previousValue !== '' && currentValue !== '') { //for multiple operations
         calculate(operator, previousValue, currentValue);
-        console.log(total)
         previousValue = total;
         inputDisplay.innerText += ` ${answerDisplay.innerText} ${operator} `;
         answerDisplay.innerText = '';
@@ -63,3 +66,4 @@ function calculate(op, prevValue, currValue) {
         total = parseInt(prevValue) * parseInt(currValue);
     }
 }
+
