@@ -14,13 +14,16 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
     if (type === 'num') {
         answerDisplay.innerText += value;
         currentValue = answerDisplay.innerText;
+
     }
 
     if (type === 'operator' && previousValue !== '' && currentValue !== '') { //for multiple operations
+        operator = value;
         calculate(operator, previousValue, currentValue);
         previousValue = total;
         inputDisplay.innerText += ` ${answerDisplay.innerText} ${operator} `;
         answerDisplay.innerText = '';
+        console.log('prev:', previousValue, 'current:', currentValue, 'total:', total)
     } else if (type === 'operator') { //for single operation
         operator = value;
         inputDisplay.innerText += ` ${currentValue} `
@@ -28,13 +31,15 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
         previousValue = currentValue;
         currentValue = '';
         inputDisplay.innerText += ` ${operator} `;
+        console.log('prev:', previousValue, 'current:', currentValue, 'total:', total)
     }
 
     if (type === 'equals') {
         currentValue = answerDisplay.innerText;
         calculate(operator, previousValue, currentValue);
         inputDisplay.innerText += ` ${currentValue} = `
-        answerDisplay.innerText = total;
+        answerDisplay.innerText = total.toFixed(12);
+        console.log('prev:', previousValue, 'current:', currentValue, 'total:', total)
     }
 
     if (type === 'clear') {
@@ -49,20 +54,21 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
     if (type === 'del') {
         answerDisplay.innerText = '';
     }
+
 }))
 
 function calculate(op, prevValue, currValue) {
     if (op === '+') {
-        total = parseInt(prevValue) + parseInt(currValue);
+        total = parseFloat(prevValue) + parseFloat(currValue);
     }
     if (op === '-') {
-        total = parseInt(prevValue) - parseInt(currValue);
+        total = parseFloat(prevValue) - parseFloat(currValue);
     }
     if (op === '/') {
-        total = parseInt(prevValue) / parseInt(currValue);
+        total = parseFloat(prevValue) / parseFloat(currValue);
     }
     if (op === 'x') {
-        total = parseInt(prevValue) * parseInt(currValue);
+        total = parseFloat(prevValue) * parseFloat(currValue);
     }
 }
 
