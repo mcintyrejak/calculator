@@ -15,18 +15,13 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
         answerDisplay.innerText += value;
         currentValue = answerDisplay.innerText;
     }
-    console.log("prev:", previousValue, "current:", currentValue)
-
 
     if (type === 'operator' && previousValue !== '' && currentValue !== '') { //for multiple operations
-        console.log('works');
-        console.log("prev:", previousValue, "current:", currentValue);
         calculate(operator, previousValue, currentValue);
         console.log(total)
         previousValue = total;
         inputDisplay.innerText += ` ${answerDisplay.innerText} ${operator} `;
         answerDisplay.innerText = '';
-        console.log("prev:", previousValue, "current:", currentValue);
     } else if (type === 'operator') { //for single operation
         operator = value;
         inputDisplay.innerText += ` ${currentValue} `
@@ -34,10 +29,7 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
         previousValue = currentValue;
         currentValue = '';
         inputDisplay.innerText += ` ${operator} `;
-        console.log("prev:", previousValue, "current:", currentValue)
     }
-
-
 
     if (type === 'equals') {
         currentValue = answerDisplay.innerText;
@@ -46,8 +38,14 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
         answerDisplay.innerText = total;
     }
 
-
-    //figure out how to operate on a string of numnbers next
+    if (type === 'clear') {
+        inputDisplay.innerText = '';
+        answerDisplay.innerText = '';
+        previousValue = '';
+        currentValue = '';
+        operator = '';
+        total = '';
+    }
 
 }))
 
