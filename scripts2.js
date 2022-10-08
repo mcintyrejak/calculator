@@ -13,17 +13,31 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
 
     if (type === 'num') {
         answerDisplay.innerText += value;
-    }
-
-    if (type === 'operator') {
-        operator = value;
         currentValue = answerDisplay.innerText;
-
-        inputDisplay.innerText += `${currentValue}`
-        answerDisplay.innerText = '';
-        previousValue = inputDisplay.innerText;
-        inputDisplay.innerText += ` ${operator} `;
     }
+    console.log("prev:", previousValue, "current:", currentValue)
+
+
+    if (type === 'operator' && previousValue !== '' && currentValue !== '') { //for multiple operations
+        console.log('works');
+        console.log("prev:", previousValue, "current:", currentValue);
+        calculate(operator, previousValue, currentValue);
+        console.log(total)
+        previousValue = total;
+        inputDisplay.innerText += ` ${answerDisplay.innerText} ${operator} `;
+        answerDisplay.innerText = '';
+        console.log("prev:", previousValue, "current:", currentValue);
+    } else if (type === 'operator') { //for single operation
+        operator = value;
+        inputDisplay.innerText += ` ${currentValue} `
+        answerDisplay.innerText = '';
+        previousValue = currentValue;
+        currentValue = '';
+        inputDisplay.innerText += ` ${operator} `;
+        console.log("prev:", previousValue, "current:", currentValue)
+    }
+
+
 
     if (type === 'equals') {
         currentValue = answerDisplay.innerText;

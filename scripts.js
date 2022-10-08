@@ -28,15 +28,23 @@ function handleNumber(num) {
 
 operatorBtns.forEach((operatorBtn) => operatorBtn.addEventListener('click', function (e) {
     handleOperator(e.target.textContent);
-    // inputDisplay.textContent = answerDisplay.innerText
-    // inputDisplay.textContent += ` ${operator} `;
-    // answerDisplay.textContent = '';
+    prevValue = currentValue;
+
 }));
+
+
 
 function handleOperator(op) {
     operator = op;
-    prevValue = currentValue;
-    currentValue = '';
+
+    if (prevValue && currentValue) {
+        operate(operator, prevValue, currentValue)
+        prevValue = total;
+        currentValue = '';
+    }
+    console.log("prevValue:", prevValue, "currentValue:", currentValue, "total:", total, "operator:", operator)
+
+
 }
 
 function divide(prevValue, currentValue) {
