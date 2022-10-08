@@ -11,10 +11,6 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
     let value = button.innerText;
     let type = button.dataset.type;
 
-    if (answerDisplay.innerText.length > 12) {
-        return;
-    }
-
     if (type === 'num') {
         answerDisplay.innerText += value;
         currentValue = answerDisplay.innerText;
@@ -50,6 +46,9 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
         total = '';
     }
 
+    if (type === 'del') {
+        answerDisplay.innerText = '';
+    }
 }))
 
 function calculate(op, prevValue, currValue) {
