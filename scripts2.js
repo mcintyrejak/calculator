@@ -6,6 +6,7 @@ let currentValue = '';
 let previousValue = '';
 let operator = '';
 let total = '';
+let decimal = false;
 
 allButtons.forEach((button) => button.addEventListener('click', function (e) {
     let value = button.innerText;
@@ -19,6 +20,14 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
     if (type === 'num') {
         answerDisplay.innerText += value;
         currentValue = answerDisplay.innerText;
+    }
+
+    if (type === 'decimal' && decimal === true) {
+        console.log('you already have a decimal')
+    } else if (type === 'decimal') {
+        answerDisplay.innerText += value;
+        decimal = true;
+        console.log('you hit the decimal');
     }
 
     if (type === 'operator' && previousValue !== '' && currentValue !== '') { //for multiple operations
