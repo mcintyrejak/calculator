@@ -36,6 +36,7 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
         previousValue = total;
         inputDisplay.innerText += ` ${answerDisplay.innerText} ${operator} `;
         answerDisplay.innerText = '';
+        decimal = false;
     } else if (type === 'operator') { //for single operation
         operator = value;
         inputDisplay.innerText += ` ${currentValue} `
@@ -43,6 +44,7 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
         previousValue = currentValue;
         currentValue = '';
         inputDisplay.innerText += ` ${operator} `;
+        decimal = false;
     }
 
     if (type === 'equals') {
@@ -50,6 +52,7 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
         calculate(operator, previousValue, currentValue);
         inputDisplay.innerText += ` ${currentValue} = `
         answerDisplay.innerText = total;
+        console.log('previousValue', previousValue, 'currentValue:', currentValue, 'total:', total);
     }
 
     if (type === 'clear') {
@@ -59,6 +62,7 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
         currentValue = '';
         operator = '';
         total = '';
+        decimal = false;
     }
 
     if (type === 'del') {
@@ -73,15 +77,15 @@ allButtons.forEach((button) => button.addEventListener('click', function (e) {
 
 function calculate(op, prevValue, currValue) {
     if (op === '+') {
-        total = Number((parseInt(prevValue) + parseInt(currValue)).toFixed(12));
+        total = Number((parseFloat(prevValue) + parseFloat(currValue)).toFixed(12));
     }
     if (op === '-') {
-        total = Number((parseInt(prevValue) - parseInt(currValue)).toFixed(12));
+        total = Number((parseFloat(prevValue) - parseFloat(currValue)).toFixed(12));
     }
     if (op === '/') {
-        total = Number((parseInt(prevValue) / parseInt(currValue)).toFixed(12));
+        total = Number((parseFloat(prevValue) / parseFloat(currValue)).toFixed(12));
     }
     if (op === 'x') {
-        total = Number((parseInt(prevValue) * parseInt(currValue)).toFixed(12));
+        total = Number((parseFloat(prevValue) * parseFloat(currValue)).toFixed(12));
     }
 }
